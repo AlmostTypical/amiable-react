@@ -1,5 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import { browserHistory } from 'react-router';
 
 const SignIn = React.createClass({
 
@@ -15,7 +16,8 @@ const SignIn = React.createClass({
     const promise = auth.signInWithEmailAndPassword(email, pass);
       promise.then(function(user) {
         console.log(user);
-      })
+        browserHistory.push("/dashboard")
+      });
 
       promise.catch(function(e) {
         console.log(e.message);
@@ -33,7 +35,7 @@ const SignIn = React.createClass({
     const promise = auth.createUserWithEmailAndPassword(email, pass);
       promise.then(function(user) {
         console.log(user);
-      })
+      });
 
       promise.catch(function(e) {
         console.log(e.message);

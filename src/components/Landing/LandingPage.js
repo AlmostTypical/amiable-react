@@ -1,11 +1,7 @@
 import React from 'react';
-
-import { Link }from 'react-router';
-
-import SignIn from '../SignIn.js';
-
 import * as firebase from 'firebase';
 
+import SignIn from '../SignIn.js';
 
 const LandingPage = React.createClass({
   getUsers: function() {

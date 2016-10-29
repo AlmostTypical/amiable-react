@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router'
 import App from './App';
+import Dashboard from './components/Dashboard/Dashboard';
+import NoMatch from './components/NoMatch';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -13,4 +16,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render((<Router history={browserHistory}>
+    <Route path="/" component={App} />
+    <Route path="/dashboard" component={Dashboard} />
+    <Route path="*" component={NoMatch} />
+</Router>
+), document.getElementById('app'));
