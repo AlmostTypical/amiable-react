@@ -1,13 +1,17 @@
 import React from 'react';
 
-const App = React.createClass({
+import UserImage from './UserImage';
+import UserInfo from './UserInfo.js';
+
+const UserInfoPanel = React.createClass({
   render: function () {
     return (
       <div>
-        Hello World!
+        <UserImage />
+        <UserInfo />
       </div>
     )
   }
 });
 
-export default App;
+export default UserInfoPanel;

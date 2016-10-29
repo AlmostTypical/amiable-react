@@ -22,7 +22,8 @@
     "firebase": "^3.5.2",
     "path": "^0.12.7",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "react-router": "^4.0.0-alpha.5"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",

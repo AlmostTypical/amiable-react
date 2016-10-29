@@ -4,7 +4,7 @@ const EventsPanel = React.createClass({
   render: function () {
     return (
       <div>
-        Hello World!
+        Info about the events a user has signed up for/created
       </div>
     )
   }

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const App = React.createClass({
+const UserInfo = React.createClass({
   render: function () {
     return (
       <div>
-        Hello World!
+        This is where all the user flavour text and info goes.
       </div>
     )
   }
 });
 
-export default App;
+export default UserInfo;
