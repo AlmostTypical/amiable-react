@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
-import SignIn from '../SignIn.js';
+import Authentication from '../Authentication.js';
 
 const LandingPage = React.createClass({
   getUsers: function() {
@@ -15,7 +15,7 @@ const LandingPage = React.createClass({
       <div className="landing-page">
         <h1>Amiable</h1>
         <p>Some PR text of somesort here</p>
-        <SignIn />
+        <Authentication />
       </div>
     )
   }

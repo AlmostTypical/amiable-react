@@ -15,7 +15,7 @@ const SignIn = React.createClass({
 
     const promise = auth.signInWithEmailAndPassword(email, pass);
       promise.then(function(user) {
-        console.log(user);
+        localStorage.setItem('currentUser', user);
         browserHistory.push("/dashboard")
       });
 
