@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link }from 'react-router';
 
 const LandingPage = React.createClass({
   render: function () {
@@ -6,8 +7,7 @@ const LandingPage = React.createClass({
       <div>
         <h1>Amiable</h1>
         <p>Some PR text of somesort here</p>
-        <button>Sign Up</button>
-        <button>Sign In</button>
+        <Link to="/signup"><button>Sign Up</button></Link>
       </div>
     )
   }

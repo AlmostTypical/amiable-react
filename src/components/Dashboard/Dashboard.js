@@ -10,7 +10,7 @@ import ChatHistory from './ChatHistory';
 const Dashboard = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="container-dash">
         <NavBar />
         <UserInfoPanel />
         <EventsPanel />

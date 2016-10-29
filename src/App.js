@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Match, Link, Miss } from 'react-router'
+import { BrowserRouter, Match, Miss } from 'react-router'
 
 import LandingPage from './components/Landing/LandingPage';
 import SignIn from './components/SignIn';

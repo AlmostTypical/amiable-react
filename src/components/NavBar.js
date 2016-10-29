@@ -3,8 +3,9 @@ import React from 'react';
 const NavBar = React.createClass({
   render: function () {
     return (
-      <div>
-        Nav Bar!
+      <div className="navbar">
+        <a className="logo">Amiable</a>
+        <a className="navtext">Logout</a>
       </div>
     )
   }
