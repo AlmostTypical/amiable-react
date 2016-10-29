@@ -10,15 +10,17 @@ import ChatHistory from './ChatHistory';
 
 const Dashboard = React.createClass({
   getInitialState: function() {
-
     return {
       currentUser: ''
     }
-
   },
   componentDidMount: function() {
     firebase.auth().onAuthStateChanged(function(firebaseUser) {
       this.handleUser(firebaseUser);
+      const userRef = firebase.database().ref().child('users');
+      userRef.child(firebaseUser.uid).update({
+        'isOnline': true
+      })
     }.bind(this))
 
   },
@@ -27,14 +29,25 @@ const Dashboard = React.createClass({
   },
   render: function () {
     return (
-      <div className="container-dash">
-        <NavBar />
-        <UserInfoPanel />
-        <EventsPanel />
-        <AvailabilityPanel />
-        <TimeSlotPanel />
-        <ChatHistory />
-        <div>{this.state.currentUser}</div>
+      <div className="dashboard-container">
+        <NavBar user={this.state.currentUser}/>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <UserInfoPanel />
+              <EventsPanel />
+            </div>
+            <div className="col-md-4">
+              <TimeSlotPanel />
+              <ChatHistory />
+            </div>
+            <div className="col-md-4">
+              <AvailabilityPanel />
+            </div>
+          </div>
+
+        </div>
+
       </div>
     )
   }

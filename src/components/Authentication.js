@@ -3,7 +3,6 @@ import * as firebase from 'firebase';
 import { browserHistory } from 'react-router';
 
 const SignIn = React.createClass({
-
   signInUser: function(e) {
     e.preventDefault();
     const txtEmail = document.getElementById('email');
@@ -15,7 +14,6 @@ const SignIn = React.createClass({
 
     const promise = auth.signInWithEmailAndPassword(email, pass);
       promise.then(function(user) {
-        localStorage.setItem('currentUser', user);
         browserHistory.push("/dashboard")
       });
 
@@ -25,21 +23,7 @@ const SignIn = React.createClass({
   },
   signUpUser: function(e) {
     e.preventDefault();
-    const txtEmail = document.getElementById('email');
-    const txtPass = document.getElementById('password');
-    const email = txtEmail.value;
-    const pass = txtPass.value;
-
-    const auth = firebase.auth();
-
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
-      promise.then(function(user) {
-        console.log(user);
-      });
-
-      promise.catch(function(e) {
-        console.log(e.message);
-      })
+    browserHistory.push('/signup');
   },
   render: function () {
     return (

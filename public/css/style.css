@@ -1,5 +1,16 @@
+/*********************************************************
+* GENERAL SETTINGS
+*********************************************************/
 
 body {
+  margin: 0;
+}
+
+/*********************************************************
+* LANDING PAGE
+*********************************************************/
+.landing-page,
+.sign-up-container {
   background: #41458d;
   color: #fff;
   display: flex;
@@ -12,14 +23,16 @@ body {
   flex-direction: column;
 }
 
-.sign-in-container input {
+input,
+textarea {
   color: #fff;
   border: none;
   background: rgba(0, 0, 0, .3);
   padding: .5em 1em;
 }
 
-.sign-in-container input:focus {
+
+input:focus {
   outline: none;
 }
 
@@ -50,13 +63,29 @@ body {
   cursor: pointer;
 }
 
+/*********************************************************
+* LANDING PAGE
+*********************************************************/
+
+.btn-logout {
+  background: #ff0000;
+  color: #fff;
+  padding: .5em 1em;
+  margin-top: .5em;
+  margin-left: 1em;
+}
+
 .navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
+.navbar-userInfo p,
+.navbar-userInfo button {
+  float: left;
+}
+
 .logo {
     font-size: 20px;
 }
-
