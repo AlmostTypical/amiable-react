@@ -1,3 +1,55 @@
+
+body {
+  background: #41458d;
+  color: #fff;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sign-in-container input {
+  color: #fff;
+  border: none;
+  background: rgba(0, 0, 0, .3);
+  padding: .5em 1em;
+}
+
+.sign-in-container input:focus {
+  outline: none;
+}
+
+.btn {
+  border: none;
+  background: none;
+}
+
+.btn-signIn {
+  color: #fff;
+  width: 100%;
+  padding: .5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 2px solid #fff;
+}
+
+.btn-signUp {
+  color: #000;
+  width: 100%;
+  padding: .5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 2px solid #fff;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
 .navbar {
     display: flex;
     flex-direction: row;
@@ -7,3 +59,4 @@
 .logo {
     font-size: 20px;
 }
+
