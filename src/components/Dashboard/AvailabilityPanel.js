@@ -1,11 +1,11 @@
 import React from 'react';
-import _ from 'underscore';
 import * as firebase from 'firebase';
+
 
 const AvailabilityPanel = React.createClass({
   getInitialState: function() {
     return {
-      users: []
+      users: [],
     }
   },
   componentWillMount: function() {
@@ -23,13 +23,22 @@ const AvailabilityPanel = React.createClass({
   handleUser: function(users) {
     this.setState({users: users})
   },
+  selectUser: function(e) {
+    var data = {};
+    data.selectedUser = e.target.id;
+    data.selectedUserData = this.state.users.filter(function (user) {
+      return user.username === data.selectedUser;
+    });
+    this.props.selectUser(data);
+  },
   render: function () {
     var userNodes = [];
+    var that = this;
     userNodes = this.state.users.map(function(user, index) {
       if(user.isOnline) {
-        return <li className="online" key={index}>{user.username}</li>
+        return <li className="online" onClick={that.selectUser} key={index} id={user.username}>{user.username}</li>
       } else {
-        return <li className="offline" key={index}>{user.username}</li>
+        return <li className="offline" onClick={that.selectUser} key={index} id={user.username}>{user.username}</li>
       }
 
     });

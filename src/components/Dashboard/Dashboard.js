@@ -1,5 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import { browserHistory } from 'react-router';
 
 import NavBar from '../NavBar';
 import UserInfoPanel from './UserInfo/UserInfoPanel';
@@ -8,11 +9,12 @@ import AvailabilityPanel from './AvailabilityPanel';
 import TimeSlotPanel from './TimeSlotsPanel';
 import ChatHistory from './ChatHistory';
 import GeneralChat from './GeneralChat';
+import ChatWindow from '../ChatWindow';
 
 const Dashboard = React.createClass({
   getInitialState: function() {
     return {
-      currentUser: ''
+      currentUsername: ''
     }
   },
   componentDidMount: function() {
@@ -26,12 +28,27 @@ const Dashboard = React.createClass({
 
   },
   handleUser: function(user) {
-    this.setState({currentUser: user.email});
+    this.setState({
+      currentUserEmail: user.email
+    });
+  },
+  selectUser: function (data) {
+    var conversationsRef = firebase.database().ref().child('conversations');
+    conversationsRef.push({
+      user1: this.state.currentUserEmail,
+      user2: data.selectedUser,
+      createdAt: new Date().getTime()
+    });
+    console.log(data.selectedUser);
+    return <ChatWindow
+      user1={this.state.currentUsername}
+      user2={data.selectedUser}
+    />
   },
   render: function () {
     return (
       <div className="dashboard-container">
-        <NavBar user={this.state.currentUser}/>
+        <NavBar user={this.state.currentUserEmail}/>
         <div className="container">
           <div className="row">
             <div className="col-md-4">
@@ -44,7 +61,7 @@ const Dashboard = React.createClass({
               <GeneralChat />
             </div>
             <div className="col-md-4">
-              <AvailabilityPanel />
+              <AvailabilityPanel selectUser={this.selectUser}/>
             </div>
           </div>
 

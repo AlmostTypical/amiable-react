@@ -7,7 +7,7 @@ const GeneralChat = React.createClass({
     generalRef.on('child_added', function(snap) {
       const user = snap.val().user;
       const comment = snap.val().comment;
-      console.log(user);
+      // console.log(user);
       const list = document.createElement('li');
       list.innerHTML = user + ': ' + comment;
       const ul = document.getElementById('chat-display');
@@ -21,7 +21,6 @@ const GeneralChat = React.createClass({
     const currentUser = firebase.auth().currentUser.displayName;
     const generalRef = firebase.database().ref().child('general');
     generalRef.push({user: currentUser, comment: text});
-
   },
   render: function () {
     return (

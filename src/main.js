@@ -5,6 +5,7 @@ import App from './App';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignUp from './components/SignUp';
 import NoMatch from './components/NoMatch';
+import ChatWindow from './components/ChatWindow';
 import * as firebase from 'firebase';
 
 // Initialize Firebase
@@ -19,7 +20,9 @@ firebase.initializeApp(config);
 
 ReactDOM.render((<Router history={browserHistory}>
     <Route path="/" component={App} />
-    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/dashboard" component={Dashboard}>
+      <Route path="/chat" component={ChatWindow} />
+    </Route>
     <Route path="/signup" component={SignUp} />
     <Route path="*" component={NoMatch} />
 </Router>
