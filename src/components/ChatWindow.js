@@ -48,7 +48,6 @@ const ChatWindow = React.createClass({
     })
     return (
       <div>
-        <h1>Chat Window</h1>
           <div className="general-chat">
             <h2>This is your private chat with {this.props.data.user2} </h2>
             <div className="chat-container" id="chat-container">

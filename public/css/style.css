@@ -110,21 +110,24 @@ h1.logo {
 
 .btn-logout {
   color: #fff;
+  background: #41458d;
   padding: .5em 1em;
   margin-top: .5em;
   margin-left: 1em;
-  border: 1px solid #fff;
+}
+
+label {
+  color: #fff;
 }
 
 .navbar {
     padding: .5em;
-    background: #000407;
     color: #fff;
     border-bottom: 1px solid #41458d;
     -webkit-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
     box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .navbar-userInfo p,
@@ -218,7 +221,8 @@ h1.logo {
 
 .chat-container {
   overflow: scroll;
-  max-height: 400px;
+  overflow-x: hidden;
+  height: 300px;
 }
 
 .chat-input {
