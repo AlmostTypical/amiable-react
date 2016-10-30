@@ -5,11 +5,12 @@ import * as firebase from 'firebase';
 import NavBar from '../NavBar';
 import UserInfoPanel from './UserInfo/UserInfoPanel';
 import EventsPanel from './EventsPanel';
+import Notifications from './Notifications';
 import AvailabilityPanel from './AvailabilityPanel';
 // import TimeSlotPanel from './TimeSlotsPanel';
 // import ChatHistory from './ChatHistory';
 import GeneralChat from './GeneralChat';
-import ChatWindow from '../ChatWindow';
+
 
 const Dashboard = React.createClass({
   getInitialState: function() {
@@ -41,6 +42,7 @@ const Dashboard = React.createClass({
       user2: data.selectedUser,
       createdAt: new Date().getTime()
     });
+    var convoId = newConvoRef.key;
     var convoData = {
       convoId: newConvoRef.key,
       user1: this.state.currentUser,
@@ -50,11 +52,17 @@ const Dashboard = React.createClass({
       chatActive: true,
       convoData: convoData
     });
-    console.log(data.selectedUser);
-    return <ChatWindow
-      user1={this.state.currentUsername}
-      user2={data.selectedUser}
-    />
+
+    const user = firebase.auth().currentUser;
+
+    var notifRef = firebase.database().ref().child('notifications');
+    notifRef.push({
+      conversationId: convoId,
+      createdAt: new Date().getTime(),
+      inviteeId: data.selectedUser,
+      inviterId: user.displayName
+    })
+
   },
   render: function () {
       if (this.state.chatActive) {
@@ -75,6 +83,7 @@ const Dashboard = React.createClass({
                 <div className="col-md-4">
                   <UserInfoPanel />
                   <EventsPanel />
+                  <Notifications />
                 </div>
                 <div className="col-md-4">
                   <GeneralChat />

@@ -27,7 +27,7 @@ const GeneralChat = React.createClass({
     const generalRef = firebase.database().ref().child('general');
     if(this.state.currentInput.length !== 0) {
       generalRef.push({user: currentUser, comment: text});
-      this.setState({currentInput: ' '})
+      
     }
 
   },

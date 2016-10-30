@@ -148,7 +148,8 @@ input:focus {
   border: 1px solid #41458d;
 }
 
-.general-chat {
+.chat-container {
+  overflow: scroll;
   max-height: 400px;
 }
 
