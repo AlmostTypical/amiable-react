@@ -14,7 +14,8 @@ import ChatWindow from '../ChatWindow';
 const Dashboard = React.createClass({
   getInitialState: function() {
     return {
-      currentUsername: ''
+      currentUsername: '',
+      chatActive: false
     }
   },
   componentDidMount: function() {
@@ -36,9 +37,17 @@ const Dashboard = React.createClass({
   selectUser: function (data) {
     var conversationsRef = firebase.database().ref().child('conversations');
     conversationsRef.push({
-      user1: this.state.currentUserEmail,
+      user1: this.state.currentUser,
       user2: data.selectedUser,
       createdAt: new Date().getTime()
+    });
+    var convoData = {
+      user1: this.state.currentUser,
+      user2: data.selectedUser
+    };
+    this.setState({
+      chatActive: true,
+      convoData: convoData
     });
     console.log(data.selectedUser);
     return <ChatWindow
@@ -47,27 +56,36 @@ const Dashboard = React.createClass({
     />
   },
   render: function () {
-    return (
-      <div className="dashboard-container">
-        <NavBar user={this.state.currentUserEmail}/>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <UserInfoPanel />
-              <EventsPanel />
-            </div>
-            <div className="col-md-4">
-              <GeneralChat />
-            </div>
-            <div className="col-md-4">
-              <AvailabilityPanel selectUser={this.selectUser}/>
+      if (this.state.chatActive) {
+        return (
+          <div className="dashboard-container">
+            <NavBar user={this.state.currentUserEmail}/>
+            <div className="container">
+              <ChatWindow data={this.state.convoData} />
             </div>
           </div>
-
-        </div>
-
-      </div>
-    )
+        )
+      } else {
+        return (
+          <div className="dashboard-container">
+            <NavBar user={this.state.currentUserEmail}/>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-4">
+                  <UserInfoPanel />
+                  <EventsPanel />
+                </div>
+                <div className="col-md-4">
+                  <GeneralChat />
+                </div>
+                <div className="col-md-4">
+                  <AvailabilityPanel selectUser={this.selectUser}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
   }
 });
 

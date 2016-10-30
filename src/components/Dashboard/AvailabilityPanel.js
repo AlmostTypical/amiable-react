@@ -40,7 +40,6 @@ const AvailabilityPanel = React.createClass({
       } else {
         return <li className="offline" onClick={that.selectUser} key={index} id={user.username}>{user.username}</li>
       }
-
     });
     return (
       <div className="availability-panel">
