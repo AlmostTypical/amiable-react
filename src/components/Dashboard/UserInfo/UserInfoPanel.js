@@ -7,6 +7,7 @@ const UserInfoPanel = React.createClass({
   render: function () {
     return (
       <div>
+        <h2>User Profile</h2>
         <UserImage />
         <UserInfo />
       </div>

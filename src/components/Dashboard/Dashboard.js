@@ -26,7 +26,7 @@ const Dashboard = React.createClass({
 
   },
   handleUser: function(user) {
-    this.setState({currentUser: user.email});
+    this.setState({currentUser: user.displayName});
   },
   render: function () {
     return (
@@ -39,8 +39,6 @@ const Dashboard = React.createClass({
               <EventsPanel />
             </div>
             <div className="col-md-4">
-              <TimeSlotPanel />
-              <ChatHistory />
               <GeneralChat />
             </div>
             <div className="col-md-4">

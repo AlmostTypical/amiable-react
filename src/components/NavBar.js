@@ -15,12 +15,14 @@ const NavBar = React.createClass({
   render: function () {
     return (
       <div className="navbar navbar-default">
-        <div className="navbar-logo">
-          <h1 className="logo">Amiable</h1>
-        </div>
-        <div className="navbar-userInfo">
-          <p>Logged in as <span>{this.props.user}</span></p>
-          <button className="btn btn-logout" onClick={this.logoutUser}>Logout</button>
+        <div className="container">
+          <div className="navbar-logo">
+            <h1 className="logo">Amiable</h1>
+          </div>
+          <div className="navbar-userInfo">
+            <p>Logged in as <span> - {this.props.user} - </span></p>
+            <button className="btn btn-logout" onClick={this.logoutUser}>Logout</button>
+          </div>
         </div>
       </div>
     )
