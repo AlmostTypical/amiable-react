@@ -36,12 +36,13 @@ const Dashboard = React.createClass({
   },
   selectUser: function (data) {
     var conversationsRef = firebase.database().ref().child('conversations');
-    conversationsRef.push({
+    var newConvoRef = conversationsRef.push({
       user1: this.state.currentUser,
       user2: data.selectedUser,
       createdAt: new Date().getTime()
     });
     var convoData = {
+      convoId: newConvoRef.key,
       user1: this.state.currentUser,
       user2: data.selectedUser
     };
