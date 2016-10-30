@@ -4,12 +4,15 @@ import * as firebase from 'firebase';
 const Notifications = React.createClass({
   componentDidMount: function() {
     firebase.auth().onAuthStateChanged(function(firebaseUser) {
-      const notifRef = firebase.database().ref().child('notifications');
-      notifRef.on('value', function(snap) {
-        if(firebaseUser.displayName === snap.val().username) {
-          console.log("WOOOOOOGHDOHGDSHGSD")
-        } else {
-          console.log("I don't know anymore")
+      const dbRef = firebase.database().ref().child('notifications');
+      dbRef.on('value', snap => {
+        const notifications = snap.val();
+        for(var key in notifications) {
+          if(notifications[key].inviteeId === firebaseUser.displayName) {
+            console.log('WOGSDGHDAGADS')
+          } else {
+            console.log('I\'m done, goodbye, farewell!');
+          }
         }
       })
     })
