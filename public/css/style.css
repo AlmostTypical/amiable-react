@@ -68,17 +68,16 @@ input:focus {
 *********************************************************/
 
 .btn-logout {
-  background: #ff0000;
   color: #fff;
   padding: .5em 1em;
   margin-top: .5em;
   margin-left: 1em;
+  border: 1px solid #fff;
 }
 
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    background: #41458d;
+    color: #fff;
 }
 
 .navbar-userInfo p,
@@ -86,9 +85,19 @@ input:focus {
   float: left;
 }
 
+.navbar-logo {
+  float: left;
+}
+
+.navbar-userInfo {
+  float: right;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
 .navbar-userInfo p span {
   font-weight: 700;
-  color: #41458d;
+  color: #fff;
 }
 
 .logo {
@@ -118,4 +127,40 @@ input:focus {
   display: inline-block;
   background: grey;
   margin-right: 5px;
+}
+
+.chat-container ul {
+  list-style: none;
+  padding-left: .5em;
+}
+
+.chat-container ul li p {
+  margin-bottom: 0;
+}
+.chat-container ul li p:last-child {
+  margin-top: 0;
+}
+
+.btn-primary {
+  background: #41458d;
+  color: #fff;
+  padding: .5em 1em;
+  border: 1px solid #41458d;
+}
+
+.general-chat {
+  max-height: 400px;
+}
+
+.form-control {
+  background: none;
+  border: 1px solid #41458d;
+  border-style: inset;
+  color: #000;
+}
+
+h2 {
+  background: #41458d;
+  color: #fff;
+  padding: 0 .5em;
 }
