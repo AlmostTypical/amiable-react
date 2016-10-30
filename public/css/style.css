@@ -86,6 +86,36 @@ input:focus {
   float: left;
 }
 
+.navbar-userInfo p span {
+  font-weight: 700;
+  color: #41458d;
+}
+
 .logo {
     font-size: 20px;
+}
+
+.availability-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.online:before {
+  content: '';
+  height: 10px;
+  border-radius: 100px;
+  width: 10px;
+  display: inline-block;
+  background: green;
+  margin-right: 5px;
+}
+
+.offline:before {
+  content: '';
+  height: 10px;
+  border-radius: 100px;
+  width: 10px;
+  display: inline-block;
+  background: grey;
+  margin-right: 5px;
 }

@@ -19,7 +19,7 @@ const NavBar = React.createClass({
           <h1 className="logo">Amiable</h1>
         </div>
         <div className="navbar-userInfo">
-          <p>{this.props.user}</p>
+          <p>Logged in as <span>{this.props.user}</span></p>
           <button className="btn btn-logout" onClick={this.logoutUser}>Logout</button>
         </div>
       </div>

@@ -28,8 +28,6 @@ const SignUp = React.createClass({
           location: location,
           about: about
         })
-
-
       })
       promise.catch(function(err) {
         console.log(err.message);
