@@ -7,6 +7,7 @@ import EventsPanel from './EventsPanel';
 import AvailabilityPanel from './AvailabilityPanel';
 import TimeSlotPanel from './TimeSlotsPanel';
 import ChatHistory from './ChatHistory';
+import GeneralChat from './GeneralChat';
 
 const Dashboard = React.createClass({
   getInitialState: function() {
@@ -40,6 +41,7 @@ const Dashboard = React.createClass({
             <div className="col-md-4">
               <TimeSlotPanel />
               <ChatHistory />
+              <GeneralChat />
             </div>
             <div className="col-md-4">
               <AvailabilityPanel />

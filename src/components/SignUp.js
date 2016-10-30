@@ -17,6 +17,9 @@ const SignUp = React.createClass({
 
     const promise = auth.createUserWithEmailAndPassword(email, pass);
       promise.then(function(user) {
+        user.updateProfile({
+          displayName: username
+        });
         var usersRef = firebase.database().ref().child('users');
         usersRef.child(user.uid).set({
           email: email,

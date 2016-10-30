@@ -26,7 +26,6 @@ const AvailabilityPanel = React.createClass({
   render: function () {
     var userNodes = [];
     userNodes = this.state.users.map(function(user, index) {
-
       if(user.isOnline) {
         return <li className="online" key={index}>{user.username}</li>
       } else {
