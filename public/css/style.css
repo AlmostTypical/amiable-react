@@ -3,6 +3,13 @@
 *********************************************************/
 
 body {
+  background-image:
+    radial-gradient(
+      circle,
+      #41458d,
+      #000
+    );
+  font-family: 'Roboto', 'Open Sans', sans-serif;
   margin: 0;
 }
 
@@ -11,7 +18,6 @@ body {
 *********************************************************/
 .landing-page,
 .sign-up-container {
-  background: #41458d;
   color: #fff;
   display: flex;
   min-height: 100vh;
@@ -27,13 +33,20 @@ input,
 textarea {
   color: #fff;
   border: none;
-  background: rgba(0, 0, 0, .3);
+  background: none;
+  border-bottom: 1px solid #d1d1d1;
   padding: .5em 1em;
 }
 
 
 input:focus {
   outline: none;
+}
+
+h1.logo {
+  font-size: 48px;
+  font-family: 'Roboto';
+  letter-spacing: 2px;
 }
 
 .btn {
@@ -47,20 +60,48 @@ input:focus {
   padding: .5em;
   text-transform: uppercase;
   font-weight: 700;
-  border: 2px solid #fff;
+
+  transition: all.3s ease-in-out;
+}
+
+.sign-up-container p {
+  margin-bottom: 0;
+}
+
+.sign-up-container .btn-signUp {
+  padding: .5em 1em;
 }
 
 .btn-signUp {
-  color: #000;
+  color: steelblue;
   width: 100%;
   padding: .5em;
   text-transform: uppercase;
   font-weight: 700;
-  border: 2px solid #fff;
+  transition: all .3s ease-in-out;
+}
+
+.btn-signIn:hover {
+  background: #fff;
+  color: steelblue;
+}
+
+.btn-signUp:hover {
+  background: steelblue;
+  color: #fff;
 }
 
 .btn:hover {
   cursor: pointer;
+}
+
+.auth-btn {
+  margin-top: 40px;
+}
+
+.auth-btn button {
+  float: left;
+  width: 50%;
 }
 
 /*********************************************************
@@ -76,8 +117,14 @@ input:focus {
 }
 
 .navbar {
-    background: #41458d;
+    padding: .5em;
+    background: #000407;
     color: #fff;
+    border-bottom: 1px solid #41458d;
+    -webkit-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
+    box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
+    margin-bottom: 50px;
 }
 
 .navbar-userInfo p,
@@ -87,16 +134,25 @@ input:focus {
 
 .navbar-logo {
   float: left;
+  margin-top: 3px;
+}
+
+.navbar-logo h1 {
+  margin: 0;
 }
 
 .navbar-userInfo {
   float: right;
   overflow: hidden;
-  margin-top: 2px;
+  color: #fff;
 }
 
 .navbar-userInfo p span {
   font-weight: 700;
+  color: #fff;
+}
+
+.col-md-4 {
   color: #fff;
 }
 
@@ -107,6 +163,17 @@ input:focus {
 .availability-panel ul {
   list-style: none;
   padding-left: 0;
+  color: #fff;
+  font-size: 15px;
+
+}
+
+.availability-panel ul li {
+  padding: .5em;
+}
+
+.online {
+  font-weight: 700;
 }
 
 .online:before {
@@ -117,6 +184,7 @@ input:focus {
   display: inline-block;
   background: green;
   margin-right: 5px;
+
 }
 
 .offline:before {
@@ -153,15 +221,27 @@ input:focus {
   max-height: 400px;
 }
 
+.chat-input {
+  margin-top: 20px;
+}
+
 .form-control {
-  background: none;
-  border: 1px solid #41458d;
-  border-style: inset;
-  color: #000;
+  background: #fff;
+  color: #41458d;
+  margin-top: 10px;
+  width: 82%;
+  transition: all .3s ease-in-out;
+}
+
+.form-group .submit-btn:hover {
+  color: #4d52a8;
 }
 
 h2 {
   background: #41458d;
+  -webkit-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
+box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
   color: #fff;
   padding: 0 .5em;
 }

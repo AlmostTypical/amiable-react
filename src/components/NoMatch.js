@@ -4,7 +4,7 @@ const NoMatch = React.createClass({
   render: function () {
     return (
       <div>
-        YOU DONE FUCKED UP NOW
+        You're not supposed to be here!
       </div>
     )
   }

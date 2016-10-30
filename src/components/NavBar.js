@@ -1,6 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 const NavBar = React.createClass({
   logoutUser: function() {
@@ -17,7 +17,7 @@ const NavBar = React.createClass({
       <div className="navbar navbar-default">
         <div className="container">
           <div className="navbar-logo">
-            <h1 className="logo">Amiable</h1>
+            <h1>Amiable</h1>
           </div>
           <div className="navbar-userInfo">
             <p>Logged in as <span> - {this.props.user} - </span></p>

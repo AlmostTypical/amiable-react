@@ -34,12 +34,14 @@ const SignIn = React.createClass({
           <p>
             <input type="password" id="password" name="password" placeholder="Enter your password" autoComplete="off"></input>
           </p>
-          <p>
-            <button id="signIn" className="btn btn-signIn" onClick={this.signInUser}>Sign In</button>
-          </p>
-          <p>
-            <button id="signUp" className="btn btn-signUp" onClick={this.signUpUser}>Sign Up</button>
-          </p>
+          <div className="auth-btn">
+            <p>
+              <button id="signIn" className="btn btn-signIn" onClick={this.signInUser}>Sign In</button>
+            </p>
+            <p>
+              <button id="signUp" className="btn btn-signUp" onClick={this.signUpUser}>Sign Up</button>
+            </p>
+          </div>
       </div>
     )
   }

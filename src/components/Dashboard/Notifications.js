@@ -7,7 +7,7 @@ const Notifications = React.createClass({
       invitations: []
     }
   },
-  componentWillMount: function() {
+  componentDidMount: function() {
     firebase.auth().onAuthStateChanged(function(firebaseUser) {
       const dbRef = firebase.database().ref().child('notifications');
       var temp = [];
@@ -17,7 +17,6 @@ const Notifications = React.createClass({
         for(var key in notifications) {
           if(notifications[key].inviteeId === firebaseUser.displayName) {
             temp.push({user: notifications[key].inviterId})
-            console.log(snap.key);
             this.setState({invitations: temp})
           } else {
             console.log('I\'m done, goodbye, farewell!');
@@ -42,7 +41,7 @@ const Notifications = React.createClass({
       console.log(invite.snapKey);
       return <li key={i}>
         <p>You have a chat invitation from <strong> - {invite.user} - </strong></p>
-        <p>You can either <a href="#">Accept</a> or <button href="#">Decline</button></p>
+        <p>You can either <a href="#">Accept</a> or <a href="#">Decline</a></p>
         </li>
     })
     return (

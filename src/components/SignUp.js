@@ -36,15 +36,13 @@ const SignUp = React.createClass({
         console.log(err.message);
       })
 
-
-
   browserHistory.push('/dashboard');
 
   },
   render: function () {
     return (
       <div className="sign-up-container">
-        <h1>Amiable</h1>
+        <h1 className="logo">Amiable</h1>
           <p>
             <input type="email" id="email" name="email" placeholder="Enter your email" autoComplete="off"></input>
           </p>
@@ -61,10 +59,10 @@ const SignUp = React.createClass({
             <input type="text" id="location" name="location" placeholder="Enter your location" autoComplete="off"></input>
           </p>
           <p>
-              <label><input type="checkbox" id="chatter" name="chatter" value="chatter_checkbox"></input>Are you a chatter ?</label>
+            <textarea id="about" name="about" placeholder="Tell us a bit about you"></textarea>
           </p>
           <p>
-            <textarea id="about" name="about" placeholder="Tell us a bit about you"></textarea>
+              <label><input type="checkbox" id="chatter" name="chatter" value="chatter_checkbox"></input>Are you a chatter ?</label>
           </p>
           <p>
             <button id="signUp" className="btn btn-signUp" onClick={this.signUpUser}>Sign Up</button>

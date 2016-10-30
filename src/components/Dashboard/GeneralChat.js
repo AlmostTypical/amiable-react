@@ -27,9 +27,8 @@ const GeneralChat = React.createClass({
     const generalRef = firebase.database().ref().child('general');
     if(this.state.currentInput.length !== 0) {
       generalRef.push({user: currentUser, comment: text});
-      
-    }
 
+    }
   },
   handleChange: function(e) {
     this.setState({currentInput: e.target.value})
@@ -46,7 +45,7 @@ const GeneralChat = React.createClass({
     return (
       <div className="general-chat">
         <h2>General Chat </h2>
-        <div className="chat-container">
+        <div className="chat-container" id="chat-container">
           <ul id="chat-display">
             {nodes}
           </ul>

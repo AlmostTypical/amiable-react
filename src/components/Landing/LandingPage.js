@@ -13,8 +13,7 @@ const LandingPage = React.createClass({
   render: function () {
     return (
       <div className="landing-page">
-        <h1>Amiable</h1>
-        <p>Some PR text of somesort here</p>
+        <h1 className="logo">Amiable</h1>
         <Authentication />
       </div>
     )

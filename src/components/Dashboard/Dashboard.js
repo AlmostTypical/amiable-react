@@ -10,6 +10,7 @@ import AvailabilityPanel from './AvailabilityPanel';
 // import TimeSlotPanel from './TimeSlotsPanel';
 // import ChatHistory from './ChatHistory';
 import GeneralChat from './GeneralChat';
+import ChatWindow from '../ChatWindow';
 
 
 const Dashboard = React.createClass({
@@ -62,6 +63,7 @@ const Dashboard = React.createClass({
       inviteeId: data.selectedUser,
       inviterId: user.displayName
     })
+
 
   },
   render: function () {
