@@ -1,13 +1,13 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router';
 
 import NavBar from '../NavBar';
 import UserInfoPanel from './UserInfo/UserInfoPanel';
 import EventsPanel from './EventsPanel';
 import AvailabilityPanel from './AvailabilityPanel';
-import TimeSlotPanel from './TimeSlotsPanel';
-import ChatHistory from './ChatHistory';
+// import TimeSlotPanel from './TimeSlotsPanel';
+// import ChatHistory from './ChatHistory';
 import GeneralChat from './GeneralChat';
 import ChatWindow from '../ChatWindow';
 
@@ -29,7 +29,8 @@ const Dashboard = React.createClass({
   },
   handleUser: function(user) {
     this.setState({
-      currentUserEmail: user.email
+      currentUserEmail: user.email,
+      currentUser: user.displayName
     });
   },
   selectUser: function (data) {
@@ -56,8 +57,6 @@ const Dashboard = React.createClass({
               <EventsPanel />
             </div>
             <div className="col-md-4">
-              <TimeSlotPanel />
-              <ChatHistory />
               <GeneralChat />
             </div>
             <div className="col-md-4">
