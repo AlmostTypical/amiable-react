@@ -249,3 +249,7 @@ box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
   color: #fff;
   padding: 0 .5em;
 }
+
+#chat-display li {
+  color: #fff;
+}

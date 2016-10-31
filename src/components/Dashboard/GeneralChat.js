@@ -9,29 +9,37 @@ const GeneralChat = React.createClass({
     }
   },
   componentDidMount: function() {
+
     const generalRef = firebase.database().ref().child('general');
     var temp = [];
     const user = generalRef.on('child_added', function(snap) {
       temp.push({user: snap.val().user, comment: snap.val().comment});
       this.handleChat(temp);
     }.bind(this))
+
   },
   handleChat: function(temp) {
-    this.setState({chat: temp})
+    this.setState({chat: temp}, function() {
+      var chatDiv = document.getElementById('chat-container');
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    })
   },
   submitChat: function(e) {
-    e.preventDefault();
-    var text = this.state.currentInput;
 
+    e.preventDefault();
+    var chatDiv = document.getElementById('chat-container');
     const currentUser = firebase.auth().currentUser.displayName;
     const generalRef = firebase.database().ref().child('general');
     if(this.state.currentInput.length !== 0) {
-      generalRef.push({user: currentUser, comment: text});
+      generalRef.push({user: currentUser, comment: this.state.currentInput});
+      this.setState({currentInput: ''})
     }
-    this.setState({currentInput: ''})
+    chatDiv.scrollTop = chatDiv.scrollHeight + 99999999;
   },
   handleChange: function(e) {
-    this.setState({currentInput: e.target.value})
+    this.setState({currentInput: e.target.value}, function() {
+      console.log(this.state.currentInput);
+    })
   },
   render: function () {
     const nodes = this.state.chat.map(function(chat, index) {
@@ -54,10 +62,9 @@ const GeneralChat = React.createClass({
           <form role="form" onSubmit={this.submitChat}>
             <div className="form-group">
               <label>Please enter your comment here: </label>
-              <input type="text" className="form-control" id="comments" name="comments" onChange={this.handleChange} autoComplete="off"></input>
+              <input type="text" value={this.state.currentInput} className="form-control" id="comments" name="comments" onChange={this.handleChange} autoComplete="off"></input>
               <button type="submit" id="submit-btn" name="submit-btn" className="btn btn-primary">Send</button>
             </div>
-
           </form>
         </div>
       </div>

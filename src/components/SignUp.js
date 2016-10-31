@@ -31,13 +31,12 @@ const SignUp = React.createClass({
           location: location,
           about: about
         })
+        browserHistory.push('/dashboard');
       })
       promise.catch(function(err) {
         console.log(err.message);
+
       })
-
-  browserHistory.push('/dashboard');
-
   },
   render: function () {
     return (

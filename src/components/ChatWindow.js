@@ -17,7 +17,6 @@ const ChatWindow = React.createClass({
         console.log("Hello");
         temp.push({user: snap.val().userId, text: snap.val().text})
       }
-
       this.handleChats(temp);
     }).bind(this)
   },
@@ -36,6 +35,7 @@ const ChatWindow = React.createClass({
     if(this.state.currentInput.length !== 0) {
       generalRef.push({convoId: this.props.data.convoId, userId: currentUser.displayName, createdAt: new Date().getTime(), text: this.state.currentInput });
     }
+    this.setState({currentInput: ''});
   },
   render: function () {
     const nodes = this.state.chat.map(function(message, index) {
@@ -62,7 +62,6 @@ const ChatWindow = React.createClass({
                   <input type="text" className="form-control" id="comments" name="comments" onChange={this.handleChange} autoComplete="off"></input>
                   <button type="submit" id="submit-btn" name="submit-btn" className="btn btn-primary">Send</button>
                 </div>
-
               </form>
             </div>
           </div>
