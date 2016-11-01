@@ -57,7 +57,7 @@ const Dashboard = React.createClass({
     const user = firebase.auth().currentUser;
 
     var notifRef = firebase.database().ref().child('notifications');
-    notifRef.push({
+    notifRef.child(convoId).set({
       conversationId: convoId,
       createdAt: new Date().getTime(),
       inviteeId: data.selectedUser,

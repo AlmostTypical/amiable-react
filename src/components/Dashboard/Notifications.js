@@ -16,7 +16,7 @@ const Notifications = React.createClass({
         const notifications = snap.val();
         for(var key in notifications) {
           if(notifications[key].inviteeId === firebaseUser.displayName) {
-            temp.push({user: notifications[key].inviterId})
+            temp.push({user: notifications[key].inviterId, id: notifications[key].conversationId})
             this.setState({invitations: temp})
           } else {
             console.log('I\'m done, goodbye, farewell!');
@@ -24,6 +24,11 @@ const Notifications = React.createClass({
         }
       })
       this.handleInvitations(temp);
+
+      dbRef.on('child_removed', snap => {
+        const liToRemove = document.getElementById(snap.key);
+        liToRemove.remove();
+      })
     }.bind(this))
 
   },
@@ -33,14 +38,12 @@ const Notifications = React.createClass({
   removeNotification: function(e) {
     e.preventDefault();
     var notificationRef = firebase.database().ref().child("notifications");
-    var selectedInvitation = e.target.parentElement.parentElement;
-    notificationRef.on('child_removed', snap => {
-      console.log(snap.val());
-    })
+    var selectedInvitation = e.target.parentElement.parentElement.id;
+    notificationRef.child(selectedInvitation).remove();
   },
   render: function () {
     var nodes = this.state.invitations.map(function(invite, i) {
-      return (<li key={i} id={i}>
+      return (<li key={i} id={invite.id}>
         <p>You have a chat invitation from <strong> - {invite.user} - </strong></p>
         <p>You can either <a href="#">Accept</a> or <a href="" onClick={this.removeNotification}>Decline</a></p>
         </li>)

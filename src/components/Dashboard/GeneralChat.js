@@ -28,7 +28,6 @@ const GeneralChat = React.createClass({
     })
   },
   submitChat: function(e) {
-
     e.preventDefault();
     var chatDiv = document.getElementById('chat-container');
     const currentUser = firebase.auth().currentUser.displayName;

@@ -1,7 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
-
 const AvailabilityPanel = React.createClass({
   getInitialState: function() {
     return {
