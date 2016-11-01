@@ -30,20 +30,21 @@ const Notifications = React.createClass({
   handleInvitations: function(invitations) {
     this.setState({invitations: invitations})
   },
-  removeNotification: function() {
-    const dbRef = firebase.database().ref().child("notifications");
-    dbRef.on('child_removed', snap => {
-      const li = document.getElementById('')
+  removeNotification: function(e) {
+    e.preventDefault();
+    var notificationRef = firebase.database().ref().child("notifications");
+    var selectedInvitation = e.target.parentElement.parentElement;
+    notificationRef.on('child_removed', snap => {
+      console.log(snap.val());
     })
   },
   render: function () {
     var nodes = this.state.invitations.map(function(invite, i) {
-      console.log(invite.snapKey);
-      return <li key={i}>
+      return (<li key={i} id={i}>
         <p>You have a chat invitation from <strong> - {invite.user} - </strong></p>
-        <p>You can either <a href="#">Accept</a> or <a href="#">Decline</a></p>
-        </li>
-    })
+        <p>You can either <a href="#">Accept</a> or <a href="" onClick={this.removeNotification}>Decline</a></p>
+        </li>)
+    }.bind(this))
     return (
       <div>
         <h2>Notifications</h2>

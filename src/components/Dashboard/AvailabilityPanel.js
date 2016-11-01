@@ -44,7 +44,7 @@ const AvailabilityPanel = React.createClass({
     return (
       <div className="availability-panel">
         <h2>List of Users</h2>
-        <ul >
+        <ul className="users-list">
           {userNodes}
         </ul>
       </div>

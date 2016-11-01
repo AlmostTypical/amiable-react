@@ -13,6 +13,10 @@ body {
   margin: 0;
 }
 
+a {
+  cursor: pointer;
+}
+
 /*********************************************************
 * LANDING PAGE
 *********************************************************/
@@ -219,7 +223,8 @@ label {
   border: 1px solid #41458d;
 }
 
-.chat-container {
+.chat-container,
+.users-list {
   overflow: scroll;
   overflow-x: hidden;
   height: 300px;
@@ -252,4 +257,9 @@ box-shadow: -1px 14px 31px -4px rgba(0,0,0,0.75);
 
 #chat-display li {
   color: #fff;
+}
+
+
+.delete-comment {
+  text-align: right;
 }
