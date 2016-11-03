@@ -11,19 +11,26 @@ const Notifications = React.createClass({
     firebase.auth().onAuthStateChanged(function(firebaseUser) {
       const dbRef = firebase.database().ref().child('notifications');
       var temp = [];
-      dbRef.on('value', snap => {
-        temp = [];
-        const notifications = snap.val();
-        for(var key in notifications) {
-          if(notifications[key].inviteeId === firebaseUser.displayName) {
-            temp.push({user: notifications[key].inviterId, id: notifications[key].conversationId})
-            this.setState({invitations: temp})
-          } else {
-            console.log('I\'m done, goodbye, farewell!');
-          }
+      const notif = dbRef.on('child_added', snap => {
+        if(firebaseUser.uid === snap.val().inviteeID) {
+          temp.push({user: snap.val().inviterID, conversationID: snap.val().conversationID, id: snap.key});
+          this.handleInvitations(temp);
         }
       })
-      this.handleInvitations(temp);
+      // dbRef.on('value', snap => {
+      //   temp = [];
+      //   const notifications = snap.val();
+      //   console.log(notifications);
+      //   console.log(firebaseUser);
+      //   for(var key in notifications) {
+      //     if(notifications[key].inviteeID === firebaseUser.uid) {
+      //       temp.push({user: notifications[key].inviterID, conversationID: notifications[key].conversationID, id: snap.key})
+      //       this.handleInvitations(temp);
+      //     } else {
+      //       console.log("Denied");
+      //     }
+      //   }
+      // })
 
       dbRef.on('child_removed', snap => {
         const liToRemove = document.getElementById(snap.key);
@@ -31,6 +38,12 @@ const Notifications = React.createClass({
       })
     }.bind(this))
 
+  },
+  acceptNotification: function(e, privateChat) {
+    const conversationID = e.target.id;
+    privateChat = !privateChat;
+    this.props.acceptNotification(privateChat, conversationID);
+    this.removeNotification(e);
   },
   handleInvitations: function(invitations) {
     this.setState({invitations: invitations})
@@ -45,11 +58,11 @@ const Notifications = React.createClass({
     var nodes = this.state.invitations.map(function(invite, i) {
       return (<li key={i} id={invite.id}>
         <p>You have a chat invitation from <strong> - {invite.user} - </strong></p>
-        <p>You can either <a href="#">Accept</a> or <a href="" onClick={this.removeNotification}>Decline</a></p>
+        <p>You can either <a href="#" id={invite.conversationID} onClick={this.acceptNotification}>Accept</a> or <a href="" onClick={this.removeNotification}>Decline</a></p>
         </li>)
     }.bind(this))
     return (
-      <div>
+      <div className="notifications">
         <h2>Notifications</h2>
         <p>You currently have no notifications</p>
         {nodes}

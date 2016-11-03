@@ -16,8 +16,8 @@ import ChatWindow from '../ChatWindow';
 const Dashboard = React.createClass({
   getInitialState: function() {
     return {
-      currentUsername: '',
-      chatActive: false
+      currentUser: '',
+      privateChat: false
     }
   },
   componentDidMount: function() {
@@ -28,73 +28,61 @@ const Dashboard = React.createClass({
         'isOnline': true
       })
     }.bind(this))
-
+    console.log(this.state.privateChat);
   },
   handleUser: function(user) {
     this.setState({
       currentUserEmail: user.email,
-      currentUser: user.displayName
+      currentUser: user.displayName,
+      currentUserUID: user.uid
     });
   },
-  selectUser: function (data) {
-    var conversationsRef = firebase.database().ref().child('conversations');
-    var newConvoRef = conversationsRef.push({
-      user1: this.state.currentUser,
-      user2: data.selectedUser,
-      createdAt: new Date().getTime()
-    });
-    var convoId = newConvoRef.key;
-    var convoData = {
-      convoId: newConvoRef.key,
-      user1: this.state.currentUser,
-      user2: data.selectedUser
-    };
-    this.setState({
-      chatActive: true,
-      convoData: convoData
-    });
-
-    const user = firebase.auth().currentUser;
-
-    var notifRef = firebase.database().ref().child('notifications');
-    notifRef.child(convoId).set({
-      conversationId: convoId,
-      createdAt: new Date().getTime(),
-      inviteeId: data.selectedUser,
-      inviterId: user.displayName
-    })
-
-
+  selectUser: function(user) {
+    const dbRef = firebase.database().ref();
+    dbRef.child("conversations").push({userOneID: this.state.currentUserUID, userTwoID: user.uid, createdAt: new Date().getTime()})
+      .then(snap => {
+        this.setState({conversationID: snap.key, userTwo: user.uid})
+        console.log(snap.key);
+        dbRef.child("notifications").push({inviterID: this.state.currentUserUID, inviteeID: user.uid, createdAt: new Date().getTime(), accepted: false, conversationID: snap.key})
+      })
+    this.setState({privateChat: true})
+    console.log(this.state.privateChat);
+  },
+  closePrivateChat: function(privateChat, conversationID) {
+    this.setState({privateChat: privateChat, conversationID: conversationID});
+  },
+  acceptNotification: function(privateChat, conversationID) {
+    this.setState({privateChat: privateChat, conversationID: conversationID});
   },
   render: function () {
-      if (this.state.chatActive) {
-        return (
-          <div className="dashboard-container">
-            <NavBar user={this.state.currentUserEmail}/>
-            <div className="container">
-              <ChatWindow data={this.state.convoData} />
+    if(this.state.privateChat === true) {
+      return (
+        <div className="dashboard-container container-fluid">
+          <NavBar user={this.state.currentUser}/>
+            <div className="row">
+              <div className="col-md-2 main-sidebar">
+                <AvailabilityPanel currentUserUID={this.state.currentUserUID} selectUser={this.selectUser} currentUserName={this.state.currentUser}/>
+                <Notifications />
             </div>
-          </div>
-        )
-      } else {
-        return (
-          <div className="dashboard-container">
-            <NavBar user={this.state.currentUserEmail}/>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-4">
-                  <UserInfoPanel />
-                  <EventsPanel />
-                  <Notifications />
-                </div>
-                <div className="col-md-4">
-                  <GeneralChat />
-                </div>
-                <div className="col-md-4">
-                  <AvailabilityPanel selectUser={this.selectUser}/>
-                </div>
+              <div className="col-md-10 messages-display">
+                <ChatWindow closePrivateChat={this.closePrivateChat} conversationID={this.state.conversationID} user={this.state.currentUserUID} userTwo={this.state.userTwo}/>
               </div>
             </div>
+        </div>
+      )
+    } else {
+        return (
+          <div className="dashboard-container container-fluid">
+            <NavBar user={this.state.currentUser}/>
+              <div className="row">
+                <div className="col-md-2 main-sidebar">
+                  <AvailabilityPanel currentUserUID={this.state.currentUserUID} selectUser={this.selectUser} currentUserName={this.state.currentUser}/>
+                  <Notifications acceptNotification={this.acceptNotification}/>
+              </div>
+                <div className="col-md-10 messages-display">
+                  <GeneralChat />
+                </div>
+              </div>
           </div>
         )
       }

@@ -29,7 +29,8 @@ const SignUp = React.createClass({
           name: name,
           username: username,
           location: location,
-          about: about
+          about: about,
+          uid: user.uid
         })
         browserHistory.push('/dashboard');
       })

@@ -12,7 +12,7 @@ const GeneralChat = React.createClass({
     const generalRef = firebase.database().ref().child('general');
     var temp = [];
     const user = generalRef.on('child_added', function(snap) {
-      temp.push({user: snap.val().user, comment: snap.val().comment, id: snap.key});
+      temp.push({user: snap.val().user.name, comment: snap.val().text, id: snap.key});
       this.handleChat(temp);
     }.bind(this))
 
@@ -30,31 +30,31 @@ const GeneralChat = React.createClass({
   submitChat: function(e) {
     e.preventDefault();
     var chatDiv = document.getElementById('chat-container');
-    const currentUser = firebase.auth().currentUser.displayName;
+    const currentUser = firebase.auth().currentUser;
     const generalRef = firebase.database().ref().child('general');
     if(this.state.currentInput.length !== 0) {
-      generalRef.push({user: currentUser, comment: this.state.currentInput});
+      // generalRef.push({user: currentUser, comment: this.state.currentInput});
+      generalRef.push({_id: new Date().getTime(), text: this.state.currentInput, createdAt: new Date().getTime(), user: {
+        _id: currentUser.uid, name: currentUser.displayName, avatar: 'http://mdepinet.org/wp-content/uploads/person-placeholder.jpg'
+      }})
       this.setState({currentInput: ''})
     }
     chatDiv.scrollTop = chatDiv.scrollHeight;
   },
   handleInputChange: function(e) {
-    this.setState({currentInput: e.target.value}, function() {
-      console.log(this.state.currentInput);
-    })
+    this.setState({currentInput: e.target.value});
   },
   deleteComment: function(e) {
     const dbRef = firebase.database().ref().child('general');
     const liToRemove = e.target.parentElement.parentElement.id;
     console.log(liToRemove);
     dbRef.child(liToRemove).remove();
-
   },
   render: function () {
     const nodes = this.state.chat.map(function(chat, index) {
       return (
         <li id={chat.id} key={index} >
-          <p><strong>{chat.user}:</strong> <a id="toRemove" className="delete-comment" onClick={this.deleteComment}>X</a></p>
+          <p><strong>{chat.user}:</strong> <a id="toRemove" className="delete-comment" onClick={this.deleteComment}> - Delete message</a></p>
           <p>{chat.comment}</p>
         </li>
       )
@@ -71,7 +71,7 @@ const GeneralChat = React.createClass({
           <form role="form" onSubmit={this.submitChat}>
             <div className="form-group">
               <label>Please enter your comment here: </label>
-              <input type="text" value={this.state.currentInput} className="form-control" id="comments" name="comments" onChange={this.handleInputChange} autoComplete="off"></input>
+              <input type="text" value={this.state.currentInput} className="form-control" id="comments" name="comments" onChange={this.handleInputChange} autoComplete="off" placeholder="Enter your message"></input>
               <button type="submit" id="submit-btn" name="submit-btn" className="btn btn-primary">Send</button>
             </div>
           </form>
